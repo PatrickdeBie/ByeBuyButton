@@ -1,7 +1,7 @@
 window.onload = function() {
     var filteredElements = [];
 
-    var textFilter = 'koop';
+    var textFilter = ['koop', 'basket', 'buy', 'koop nu', 'bestel', 'order now', 'order', 'bestellen', 'kopen'];
 
     // Buttons
     var allButtons = getAllButtons();
@@ -26,11 +26,23 @@ function filterElements(elements, textFilter) {
     var filteredElements = [];
 
     elements.forEach(element => {
-        if(element.getAttribute('value') != undefined && element.getAttribute('value').toLowerCase() === textFilter) {
-            filteredElements.push(element);
+        var pushElement = false;
+
+        if(element.getAttribute('value') != undefined && textFilter.includes(element.getAttribute('value').toLowerCase())) {
+            pushElement = true;
         }
 
-        if(element.text != undefined && element.text.toLowerCase() === textFilter) {
+        if(element.text != undefined && textFilter.includes(element.text.toLowerCase())) {
+            pushElement = true;
+        }
+
+        textFilter.forEach(filter => {
+            if(element.getAttribute('href') != undefined && element.getAttribute('href').includes(filter)) {
+                pushElement = true;
+            }
+        });
+
+        if(pushElement) {
             filteredElements.push(element);
         }
     });
