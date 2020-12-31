@@ -1,5 +1,5 @@
 {
-    "manifest_version": 1,
+    "manifest_version": 2,
     "name": "Bye Buy Button",
     "version": "0.0.1",
     "description": "Hides the buy buttons on webshops, so you can't click it!",
@@ -8,10 +8,9 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["hideButtons.js"]
+            "js": ["hideButtons.js"],
+            "run_at": "document_end",
+            "all_frames": true
         }
-    ],
-    "browser_action": {
-        
-    }
+    ]
 }
